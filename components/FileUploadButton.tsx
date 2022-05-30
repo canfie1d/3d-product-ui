@@ -34,7 +34,7 @@ const FileUploadButton = (props: IProps) => {
 
   return (
     <form ref={formRef}>
-      <button type="button" onClick={onClickHandler}>
+      <button type="button" style={{border: 'none', padding: '5px 10px', borderRadius: '3px'}} onClick={onClickHandler}>
         {props.children}
       </button>
       <input

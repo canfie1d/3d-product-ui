@@ -15,6 +15,7 @@ const ColorChooser = ({onChange, colors}: {onChange: (color: string) => void, co
         if (color === 'custom') {
           return (
             <ColorInput
+              key={`color-input-${i}`}
               onChange={handleChange}
               className={`${styles['color']} ${!colors.includes(value) && styles['color-selected']}`}
               inputClassName={styles['hidden']}
@@ -23,8 +24,9 @@ const ColorChooser = ({onChange, colors}: {onChange: (color: string) => void, co
             />
           );
         }
+
         return (
-          <div className={`${styles['color']} ${value === color && styles['color-selected']}`} key={`radio-${i}`} style={{backgroundColor: color}}>
+          <div key={`color-input-${i}`} className={`${styles['color']} ${value === color && styles['color-selected']}`} style={{backgroundColor: color}}>
             <label className={styles['color-label']} htmlFor={`color-${i}`} />
             <input
               id={`color-${i}`}

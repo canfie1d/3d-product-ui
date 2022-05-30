@@ -1,6 +1,8 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   padding: 10px;
+  max-width: 100%;
 }
 
 .color-label {
@@ -11,9 +13,11 @@
 }
 
 .color {
-  width: 50px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border: 1px solid #eee;
-  margin-right: 2px;
+  margin-right: 5px;
 }
 
 .color-input {

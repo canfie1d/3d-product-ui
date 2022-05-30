@@ -1,0 +1,29 @@
+.container {
+  padding: 10px;
+  width: 200px;
+  border-right: 1px solid black;
+  height: 100%;
+}
+
+.container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container li {
+  margin-bottom: 10px;
+}
+
+.button {
+  border: none;
+  box-shadow: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.active {
+  background: #214f6b;
+  color: #fff;
+}

@@ -1,8 +1,13 @@
 .container {
   display: flex;
-  align-items: center;
   border: 1px solid #000;
   width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    flex-wrap: wrap;
+  }
 }
 
 .container .column {
@@ -12,4 +17,11 @@
 
 .container .column:not(:last-child) {
   border-right: 1px solid #000;
+}
+
+@media only screen and (max-width: 325px) {
+  .container .column:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #000;
+  }
 }

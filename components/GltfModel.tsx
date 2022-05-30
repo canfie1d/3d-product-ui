@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { TextureLoader } from "three";
 
 const GltfModel = ({ materialColor, materialPath, modelPath, scale = 40, position = [0, 0, 0] }: {materialColor?: string, modelPath: string, scale: number, position: number[], materialPath?: string}) => {
   const ref = useRef();
-  const gltf = useLoader(GLTFLoader, modelPath);
+  const { scene } = useLoader(GLTFLoader, modelPath)
+  const copiedScene = useMemo(() => scene.clone(), [scene])
   const [hovered, hover] = useState(false);
 
   useEffect(() => {
     if (materialPath) {
-      gltf.scene.traverse(child => {
+      copiedScene.traverse(child => {
         // @ts-ignore
         if (child.material && child.material.name === 'Logo') {
           const newPath = materialPath.replace('public/', '');
@@ -21,11 +22,13 @@ const GltfModel = ({ materialColor, materialPath, modelPath, scale = 40, positio
         }
       });
     }
-  }, [materialPath, gltf.scene]);
+  }, [materialPath, copiedScene]);
+
+
 
   useEffect(() => {
     if (materialColor) {
-      gltf.scene.traverse(child => {
+      copiedScene.traverse(child => {
         // @ts-ignore
         if (child.material && child.material.name === 'Mug') {
           // @ts-ignore
@@ -33,7 +36,7 @@ const GltfModel = ({ materialColor, materialPath, modelPath, scale = 40, positio
         }
       })
     }
-  }, [materialColor, gltf.scene]);
+  }, [materialColor, copiedScene]);
   // Subscribe this component to the render-loop, rotate the mesh every frame
   // @ts-ignore
   useFrame((state, delta) => (ref.current.rotation.y += 0.003));
@@ -41,7 +44,7 @@ const GltfModel = ({ materialColor, materialPath, modelPath, scale = 40, positio
   return (
     <primitive
       ref={ref}
-      object={gltf.scene}
+      object={copiedScene}
       position={position}
       scale={hovered ? scale * 1.0 : scale}
       onPointerOver={(_: any) => hover(true)}
